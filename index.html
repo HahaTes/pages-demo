@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh" style="font-size:15pt;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>下单系统</title>
+</head>
+
+<body>
+    <form autocomplete="on">
+        顾客姓名:
+        <input type="text" id="name" style="width:35%;font-size:20px;">
+        <br/>
+        大包数量:
+        <input type="number" id="countA" style="width:25%;font-size:20px;">
+        单价：
+        <input type="number" id="unitpriceA" value="20" style="width:25%;font-size:20px;">
+        <br/>
+        小包数量:
+        <input type="number" id="countB" style="width:25%;font-size:20px;">
+        单价：
+        <input type="number" id="unitpriceB" value="10" style="width:25%;font-size:20px;">
+        <br/>
+        送货时间:
+        <input type="date" id="date" style="width:140px;font-size:20px;">
+        <input type="time" id="time" step="300" style="width:130px;font-size:20px;">
+        <br/>
+        地址：
+        <input type="text" id="address" style="width:70%;font-size:20px;">
+        <br/>
+        备注：
+        <input type="text" id="remark" style="width:70%;font-size:20px;">
+        <br/>
+    </form>
+    <br/>
+    <center><button onclick="mytest()" style="font-size:20px;">提交</button>
+    <br/>
+        <textarea rows="10" cols="30"  id = "result" placeholder="长按复制"  style="width:300px;font-size:20px;width: 85%;"></textarea>
+    </center>
+    <br/>
+    <center>
+        <button onclick="SelectText()" style="font-size:20px;">点击全选</button>
+        <button onclick="javascript:location.reload()" style="font-size:20px;text-align: center;">开始新订单</button>
+    </center>
+
+    <!-- 当前页面输出结果 -->
+    <script type="text/javascript">
+
+        function mytest() {
+            var x = document.getElementById("result");
+            var name = document.getElementById("name").value
+            var countA = document.getElementById("countA").value;
+            var unitpriceA = document.getElementById("unitpriceA").value;
+            var countB = document.getElementById("countB").value;
+            var unitpriceB = document.getElementById("unitpriceB").value;
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time").value;
+            var address = document.getElementById("address").value;
+            var remark = document.getElementById("remark").value;
+            var money = Number(countA) * Number(unitpriceA) + Number(countB) * Number(unitpriceB);
+
+            x.value = '姓名: ' + name + '\n大包: ' + countA + '个, 小包: ' + countB + '个\n共计: ' +
+             String(money) + ' 元\n时间: ' + date + ' ' + time + '\n地址: ' + address + '\n备注: ' + 
+             remark + '\n优惠信息:满' + String(Math.floor(money / 50) * 50) + '元送' + 
+             String(Math.floor(money / 50) * 10) + '元糖\n**************\n';
+        }
+    </script> 
+    
+
+
+    <!--新的页面输出结果-->
+    <script type="text/javascript">
+        function myFunction() {
+            var name = document.getElementById("name").value
+            var countA = document.getElementById("countA").value;
+            var unitpriceA = document.getElementById("unitpriceA").value;
+            var countB = document.getElementById("countB").value;
+            var unitpriceB = document.getElementById("unitpriceB").value;
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time").value;
+            var address = document.getElementById("address").value;
+            var remark = document.getElementById("remark").value;
+
+            var money = Number(countA) * Number(unitpriceA) + Number(countB) * Number(unitpriceB);
+            document.write('<div id = "selectable1" > 姓名: ' + name + '<br/>');
+            document.write('大包: ' + countA + '个, 小包: ' + countB + '个' + '<br/>');
+            document.write('共计: ' + String(money) + ' 元' + '<br/>');
+            document.write('时间: ' + date + ' ' + time + '<br/>');
+            document.write('地址: ' + address + '<br/>');
+            document.write('备注: ' + remark + '<br/>');
+            document.write('优惠信息:满' + String(Math.floor(money / 50) * 50) + '元送' + String(Math.floor(money / 50) * 10) + '元糖' + '<br/>');
+            document.write('**************"</div><br/>');
+            document.write('<button onclick="SelectText()" style="font-size:20px;">点击全选</button>');
+            document.write('<button onclick="javascript:location.reload()" style="font-size:20px;">开始新订单</button>');
+
+        }
+    </script>
+    
+    <!--选中框里的内容，方便分享或复制-->
+    <script type="text/javascript">
+        function SelectText() {
+            var content = document.getElementById("result");
+            content.focus();
+            content.selectionStart = 0;
+            content.selectionEnd = content.value.length;
+          
+        }
+    </script>  
+</body>
+
+</html>
